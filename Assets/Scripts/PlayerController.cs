@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
@@ -6,6 +7,7 @@ public class PlayerController : MonoBehaviour
 	public float speed = 5.0f;
 	private Rigidbody playerRb;
 	private GameObject focalPoint;
+	public GameObject powerupIndicator;
 
 	private void Start()
 	{
@@ -26,7 +28,16 @@ public class PlayerController : MonoBehaviour
 		{
 			hasPowerup = true;
 			Destroy(other.gameObject);
+			StartCoroutine(PowerupCountdownRoutine());
+			powerupIndicator.gameObject.SetActive(true);
 		}
+	}
+
+	IEnumerator PowerupCountdownRoutine()
+	{
+		yield return new WaitForSeconds(7);
+		hasPowerup = false;
+		powerupIndicator.gameObject.SetActive(false);
 	}
 
 	private float powerupStrength = 15.0f;
