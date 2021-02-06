@@ -29,11 +29,16 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	private float powerupStrength = 15.0f;
+
 	private void OnCollisionEnter(Collision other)
 	{
 		if (other.gameObject.CompareTag("Enemy") && hasPowerup)
 		{
+			Rigidbody erb = other.gameObject.GetComponent<Rigidbody>();
+			Vector3 awayFromPlayer = (other.gameObject.transform.position - transform.position);
 			Debug.Log("Collision with: " + other.gameObject.name + " with powerup: " + hasPowerup);
+			erb.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
 		}
 	}
 }
