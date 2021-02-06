@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 	{
 		float forwardInput = Input.GetAxis("Vertical");
 		playerRb.AddForce(focalPoint.transform.forward * speed * forwardInput);
+		powerupIndicator.transform.position = transform.position;
 	}
 
 	public bool hasPowerup;
