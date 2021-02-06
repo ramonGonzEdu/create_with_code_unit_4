@@ -18,4 +18,22 @@ public class PlayerController : MonoBehaviour
 		float forwardInput = Input.GetAxis("Vertical");
 		playerRb.AddForce(focalPoint.transform.forward * speed * forwardInput);
 	}
+
+	public bool hasPowerup;
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Powerup"))
+		{
+			hasPowerup = true;
+			Destroy(other.gameObject);
+		}
+	}
+
+	private void OnCollisionEnter(Collision other)
+	{
+		if (collision.gameObject.CompareTag("Enemy") && hasPowerup)
+		{
+			Debug.Log("Collision with: " + collision.gameObject.name + " with powerup: " + hasPowerup);
+		}
+	}
 }
