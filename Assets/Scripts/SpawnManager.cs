@@ -3,6 +3,7 @@
 public class SpawnManager : MonoBehaviour
 {
 	public GameObject enemyPrefab;
+	public int enemyCount;
 	private float spawnRange = 9;
 	private void Start()
 	{
@@ -27,6 +28,7 @@ public class SpawnManager : MonoBehaviour
 
 	private void Update()
 	{
-
+		enemyCount = FindObjectsOfType<Enemy>().Length;
+		if (enemyCount == 0) { SpawnEnemyWave(1); }
 	}
 }
