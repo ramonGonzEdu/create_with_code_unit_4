@@ -3,12 +3,14 @@
 public class SpawnManager : MonoBehaviour
 {
 	public GameObject enemyPrefab;
+	public GameObject powerupPrefab;
 	public int enemyCount;
 	private float spawnRange = 9;
 	public int waveNumber = 1;
 	private void Start()
 	{
 		SpawnEnemyWave(waveNumber);
+		Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
 	}
 
 	private void SpawnEnemyWave(int enemiesToSpawn)
@@ -33,6 +35,8 @@ public class SpawnManager : MonoBehaviour
 		if (enemyCount == 0)
 		{
 			SpawnEnemyWave(++waveNumber);
+			Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
+
 		}
 	}
 }
