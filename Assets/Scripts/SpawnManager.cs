@@ -6,10 +6,18 @@ public class SpawnManager : MonoBehaviour
 	private float spawnRange = 9;
 	private void Start()
 	{
-		Vector3 spawnPos = GenerateSpawnPosition();
-		var copy = Instantiate(enemyPrefab, spawnPos, enemyPrefab.transform.rotation);
-		var EnemyScript = copy.GetComponent<Enemy>();
-		EnemyScript.speed = Random.Range(5, 15);
+		SpawnEnemyWave(3);
+	}
+
+	private void SpawnEnemyWave(int enemiesToSpawn)
+	{
+		for (int i = 0; i < enemiesToSpawn; i++)
+		{
+			Vector3 spawnPos = GenerateSpawnPosition();
+			var copy = Instantiate(enemyPrefab, spawnPos, enemyPrefab.transform.rotation);
+			var EnemyScript = copy.GetComponent<Enemy>();
+			EnemyScript.speed = Random.Range(5, 15);
+		}
 	}
 
 	private Vector3 GenerateSpawnPosition()
